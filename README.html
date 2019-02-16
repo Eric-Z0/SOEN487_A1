@@ -1,0 +1,81 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="file:/home/denis/.markdownNavigator/multimarkdown_layout.css">
+<style>
+
+body.multimarkdown-preview,
+body.multimarkdown-wiki-preview {
+    font-size: 11px;
+}
+</style>
+<link rel="stylesheet" href="file:/home/denis/.markdownNavigator/multimarkdown_default.css">
+</head>
+<body class="multimarkdown-preview">
+<div class="content">
+<div class="page-header"><a href="https://rinfret.xyz/5022/home/rinfesqn/repos/SOEN487_A1/blob/master/README.md" name="wikipage" id="wikipage" title="Click here to open the file on GitHub">README.md</a></div>
+<div class="hr"></div>
+<h1 id="soen487-web-services-and-applications" md-pos="2-39"><a href="#soen487-web-services-and-applications" name="soen487-web-services-and-applications">SOEN487 Web Services and Applications</a></h1>
+<h2 id="assignment-1" md-pos="43-55"><a href="#assignment-1" name="assignment-1">Assignment 1</a></h2>
+<h3 id="winter-2019" md-pos="60-71"><a href="#winter-2019" name="winter-2019">Winter 2019</a></h3>
+<h3 id="prof-denis-rinfret" md-pos="76-95"><a href="#prof-denis-rinfret" name="prof-denis-rinfret">Prof: Denis Rinfret</a></h3>
+<h2 id="developing-and-testing-a-service-to-access-and-modify-a-database" md-pos="100-164"><a href="#developing-and-testing-a-service-to-access-and-modify-a-database" name="developing-and-testing-a-service-to-access-and-modify-a-database">Developing and testing a service to access and modify a database</a></h2>
+<p md-pos="166-388">Starting from the start-up code provided, you have to use SQLAlchemy
+to design and create a database, create views to access and modify
+the data in your database, and create unit and functional tests to
+test your service.</p>
+<p md-pos="389-438">This assignment has to be done <strong md-pos="422-434">individually</strong>.</p>
+<h3 id="step-1-design-your-database" md-pos="443-471"><a href="#step-1-design-your-database" name="step-1-design-your-database">Step 1: Design your database</a></h3>
+<p md-pos="473-757">Your database should contain at least 3 base tables, and they should be
+connected through some relationships. You have to use SQLAlchemy to
+create the models and to create the necessary relationships by using
+foreign keys and back references (or other similar SQLAlchemy constructs).</p>
+<p md-pos="758-932"><em md-pos="759-815">You can choose any meaningful topic you want for your DB</em>.
+It is OK to use something related to your project, but this assignment
+must be done individually, not as a group.</p>
+<p md-pos="933-1101">You must produce a model dependency diagram in PNG format to document
+your DB. It should include the fields of each model.
+<em md-pos="1057-1061">Note</em>: that's very easy to do with PyCharm.</p>
+<p md-pos="1102-1155">You must use SQLite for your DB for this assignment.</p>
+<h3 id="step-2-create-the-views" md-pos="1160-1184"><a href="#step-2-create-the-views" name="step-2-create-the-views">Step 2: Create the views</a></h3>
+<p md-pos="1186-1270"><strong md-pos="1188-1267">Note: if you follow the TDD methodology, you should do step 3 before
+this step.</strong></p>
+<p md-pos="1271-1451">Create the views in a similar style to the views created for <code md-pos="1333-1339">Person</code>.
+You might not need to have a <code md-pos="1372-1378">Person</code> model in your DB, therefore
+don't leave it there if you don't need it.</p>
+<p md-pos="1452-1654">You will probably end up with too many views, so splitting up your
+views into many files and grouping these files in a subfolder is
+probably a good idea. You could also use <em md-pos="1626-1642">Flask Blueprints</em> for this.</p>
+<p md-pos="1655-2019">You should have views for each model, to get all instances of the model
+or a specific one by id or by any appropriate search condition. You
+should also have views using <code md-pos="1825-1829">POST</code>, <code md-pos="1833-1836">PUT</code> and/or <code md-pos="1846-1852">DELETE</code> methods to update
+the database. If appropriate, you could also have views that will add
+instances of 2 related models at the same time to avoid dependency
+problems.</p>
+<h3 id="step-3-test-your-views" md-pos="2024-2047"><a href="#step-3-test-your-views" name="step-3-test-your-views">Step 3: Test your views</a></h3>
+<p md-pos="2049-2322">Write functional tests not only for each view, but also for each possible
+case of each view. Test your views with good and bad data. You must
+validate the data and handle exceptions correctly. You might also need
+to write unit tests for your helper functions if necessary.</p>
+<h2 id="deliverables-and-grading" md-pos="2326-2350"><a href="#deliverables-and-grading" name="deliverables-and-grading">Deliverables and grading</a></h2>
+<ul>
+  <li md-pos="2352-2567">A private Git repository located on BitBucket or GitHub, shared with
+  <a md-pos="2423-2449" href="mailto:denis.rinfret@concordia.ca">denis.rinfret@concordia.ca</a> . Make sure to share it with the correct
+  email address to avoid sharing it with another account with a similar
+  name.</li>
+  <li md-pos="2567-2717">Grading overview:
+    <ul>
+      <li md-pos="2591-2637">Database, including models and diagram: 20%</li>
+      <li md-pos="2641-2654">Views: 40%</li>
+      <li md-pos="2658-2671">Tests: 20%</li>
+      <li md-pos="2675-2717">Peer review of 2 other assignments: 20%</li>
+    </ul>
+  </li>
+  <li md-pos="2717-2881"><strong md-pos="2721-2725">Note</strong>: Participation in the peer review process is mandatory to
+  receive grades for the assignments. More details about the peer review
+  will be provided later.</li>
+  <li md-pos="2881-2935"><strong md-pos="2885-2933">Due Wednesday February 13, 2019 before midnight.</strong></li>
+</ul>
+</div>
+</body>
+</html>
