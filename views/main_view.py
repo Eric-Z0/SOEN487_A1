@@ -11,4 +11,4 @@ def page_not_found(e):
 @main_bp.route('/')
 def soen487_a1():
     return jsonify({"title": "SOEN487 Assignment 1",
-                    "student": {"id": "Your id#", "name": "Your name"}})
+                    "student": {"id": "40007314", "name": "Chen Zhuang"}})
