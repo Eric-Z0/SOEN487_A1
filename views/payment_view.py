@@ -1,5 +1,6 @@
 from flask import jsonify, make_response, request
 import sqlalchemy
+import sqlite3
 import models
 from flask import Blueprint
 payment_bp = Blueprint('payment', __name__)
@@ -35,11 +36,44 @@ def create_payment():
 
     try:
         models.db.session.commit()
-    except sqlalchemy.exc.SQLAlchemyError as e:
+        return jsonify({"code": 200, "msg": "success"})
+    except sqlalchemy.exc.IntegrityError as e:
         error = "Cannot create payment. "
-        print(payment_bp.config.get("DEBUG"))
-        if payment_bp.config.get("DEBUG"):
-            error += str(e)
+        # print(payment_bp.config.get("DEBUG"))
+        # if payment_bp.config.get("DEBUG"):
+        #     error += str(e)
+        return make_response(jsonify({"code": 404, "msg": error}), 404)
+
+
+@payment_bp.route("/payment/update", methods={"PUT"})
+def update_payment():
+    payment_id = request.form.get("payment_id")
+    if not payment_id:
+        return make_response(jsonify({"code": 403,
+                                      "msg": "Cannot update payment. Missing mandatory fields."}), 403)
+
+    payment = models.Payment.query.filter_by(payment_id=payment_id).first()
+    if not payment:
+        return make_response(jsonify({"code": 404, "msg": "Cannot find this payment."}), 404)
+
+    amount = request.form.get("payment_amount")
+    payer_id = request.form.get("client_id")
+    if not amount and not payer_id:
+        return make_response(jsonify({"code": 403,
+                                      "msg": "Cannot update payment. Missing mandatory fields."}), 403)
+    if amount:
+        payment.payment_amount = amount
+
+    if payment_id:
+        payment.client_id = payer_id
+
+    try:
+        models.db.session.commit()
+    except sqlalchemy.exc.SQLAlchemyError as e:
+        error = "Cannot update payment. "
+        # print(payment_bp.config.get("DEBUG"))
+        # if payment_bp.config.get("DEBUG"):
+        #     error += str(e)
         return make_response(jsonify({"code": 404, "msg": error}), 404)
     return jsonify({"code": 200, "msg": "success"})
 
@@ -54,7 +88,7 @@ def delete_payment():
         models.db.session.delete(payment)
         try:
             models.db.session.commit()
-        except sqlalchemy.exc.SQLAlchemyError as e:
+        except sqlite3.IntegrityError as e:
             error = "Cannot delete payment. "
             print(payment_bp.config.get("DEBUG"))
             if payment_bp.config.get("DEBUG"):

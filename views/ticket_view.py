@@ -11,7 +11,17 @@ def get_all_tickets():
     return jsonify([models.row2dict(ticket) for ticket in ticket_list])
 
 
-@ticket_bp.route("/ticket/<ticket_id>")
+@ticket_bp.route("/ticket/<movie_name>")
+def get_ticket_by_name(movie_name):
+    # id is a primary key, so we'll have max 1 result row
+    ticket = models.Ticket.query.filter_by(movie_name=movie_name).first()
+    if ticket:
+        return jsonify(models.row2dict(ticket))
+    else:
+        return make_response(jsonify({"code": 404, "msg": "Cannot find the ticket with this movie name."}), 404)
+
+
+@ticket_bp.route("/ticket/<int:ticket_id>")
 def get_ticket(ticket_id):
     # id is a primary key, so we'll have max 1 result row
     ticket = models.Ticket.query.filter_by(ticket_id=ticket_id).first()
@@ -65,6 +75,9 @@ def update_ticket():
         ticket = models.Ticket.query.filter_by(movie_name=movie_name).first()
     else:
         ticket = models.Ticket.query.filter_by(ticket_id=ticket_id).first()
+
+    if not ticket:
+        return make_response(jsonify({"code": 404, "msg": "Cannot find this ticket."}), 404)
 
     ticket.movie_name = movie_name
     ticket.ticket_number = ticket_number
